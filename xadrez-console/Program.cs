@@ -5,18 +5,19 @@ using Xadrez;
 internal class Program {
     private static void Main(string[] args) {
 
-        Posicao P;
+        try {
+            Tabuleiro tabuleiro = new Tabuleiro(8, 8);
 
-        P = new Posicao(3, 4);
-        Tabuleiro tabuleiro = new Tabuleiro(8,8);
-
-        tabuleiro.colocarPeca(new Torre(Cor.Preta,tabuleiro), new Posicao(0, 0));
-        tabuleiro.colocarPeca(new Torre(Cor.Preta, tabuleiro), new Posicao(1, 3));
-        tabuleiro.colocarPeca(new Rei(Cor.Preta, tabuleiro), new Posicao(2, 4));
+            tabuleiro.colocarPeca(new Torre(Cor.Preta, tabuleiro), new Posicao(0, 0));
+            tabuleiro.colocarPeca(new Torre(Cor.Preta, tabuleiro), new Posicao(1, 3));
+            tabuleiro.colocarPeca(new Rei(Cor.Preta, tabuleiro), new Posicao(0, 2));
 
 
-        Tela.imprimirTabuleiro(tabuleiro);
-
+            Tela.imprimirTabuleiro(tabuleiro);
+        }
+        catch (TabuleiroException e) {
+            Console.WriteLine(e.Message);
+        }
 
 
     }
