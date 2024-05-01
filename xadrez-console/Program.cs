@@ -1,4 +1,5 @@
 ﻿using tabuleiro;
+using xadrez_console;
 
 internal class Program {
     private static void Main(string[] args) {
@@ -7,6 +8,8 @@ internal class Program {
 
         P = new Posicao(3, 4);
         Tabuleiro tabuleiro = new Tabuleiro(8,8);
+
+        Tela.imprimirTabuleiro(tabuleiro);
 
         Console.WriteLine("Posição: " + P);
 
