@@ -46,6 +46,9 @@ internal class Program {
                 }
             }
 
+            Console.Clear() ;
+            Tela.imprimirPartida(partida);
+
 			
 
 			
