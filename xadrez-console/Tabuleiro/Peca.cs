@@ -19,6 +19,10 @@ namespace tabuleiro {
             QntMovimentos++;
         }
 
+        public void decrementarQntMovimentos() {
+            QntMovimentos--;
+        }
+
         public bool existeMovimentosPossiveis() {
             bool[,] mat = movimentosPossiveis();
             for (int i = 0; i < Tab.Linhas; i++) {
