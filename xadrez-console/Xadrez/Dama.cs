@@ -67,7 +67,7 @@ namespace Xadrez {
                 if (Tab.peca(pos) != null && Tab.peca(pos).Cor != Cor) {
                     break;
                 }
-                pos.linha = pos.linha - 1;
+                pos.definirValores(pos.linha-1, pos.coluna);
             }
 
             //abaixo
@@ -77,7 +77,7 @@ namespace Xadrez {
                 if (Tab.peca(pos) != null && Tab.peca(pos).Cor != Cor) {
                     break;
                 }
-                pos.linha = pos.linha + 1;
+                pos.definirValores(pos.linha+1 , pos.coluna);
             }
 
             //Direita
@@ -87,7 +87,7 @@ namespace Xadrez {
                 if (Tab.peca(pos) != null && Tab.peca(pos).Cor != Cor) {
                     break;
                 }
-                pos.coluna = pos.coluna + 1;
+                pos.definirValores(pos.linha, pos.coluna + 1);
             }
 
             //Esquerda
@@ -97,7 +97,7 @@ namespace Xadrez {
                 if (Tab.peca(pos) != null && Tab.peca(pos).Cor != Cor) {
                     break;
                 }
-                pos.coluna = pos.coluna - 1;
+                pos.definirValores(pos.linha, pos.coluna - 1);
             }
 
             return mat;
