@@ -177,12 +177,37 @@ namespace xadrez_console.Xadrez {
         }
 
         private void colocarPecas() {
-            colocarNovaPeca(new Torre(Cor.Branca, tab), 'c', 1);
-            colocarNovaPeca(new Rei(Cor.Branca, tab), 'd', 1);
-            colocarNovaPeca(new Torre(Cor.Branca, tab), 'h', 7);
+            // Colocando as torres
+            colocarNovaPeca(new Torre(Cor.Branca, tab), 'a', 1);
+            colocarNovaPeca(new Torre(Cor.Branca, tab), 'h', 1);
+            colocarNovaPeca(new Torre(Cor.Preta, tab), 'a', 8);
+            colocarNovaPeca(new Torre(Cor.Preta, tab), 'h', 8);
 
-            colocarNovaPeca(new Torre(Cor.Preta, tab), 'b', 8);
-            colocarNovaPeca(new Rei(Cor.Preta, tab), 'a', 8);
+            // Colocando os cavalos
+            colocarNovaPeca(new Cavalo(Cor.Branca, tab), 'b', 1);
+            colocarNovaPeca(new Cavalo(Cor.Branca, tab), 'g', 1);
+            colocarNovaPeca(new Cavalo(Cor.Preta, tab), 'b', 8);
+            colocarNovaPeca(new Cavalo(Cor.Preta, tab), 'g', 8);
+
+            // Colocando os bispos
+            colocarNovaPeca(new Bispo(Cor.Branca, tab), 'c', 1);
+            colocarNovaPeca(new Bispo(Cor.Branca, tab), 'f', 1);
+            colocarNovaPeca(new Bispo(Cor.Preta, tab), 'c', 8);
+            colocarNovaPeca(new Bispo(Cor.Preta, tab), 'f', 8);
+
+            // Colocando a dama
+            colocarNovaPeca(new Dama(Cor.Branca, tab), 'd', 1);
+            colocarNovaPeca(new Dama(Cor.Preta, tab), 'd', 8);
+
+            // Colocando o rei
+            colocarNovaPeca(new Rei(Cor.Branca, tab), 'e', 1);
+            colocarNovaPeca(new Rei(Cor.Preta, tab), 'e', 8);
+
+            // Colocando os peões
+            for (char coluna = 'a'; coluna <= 'h'; coluna++) {
+                colocarNovaPeca(new Peao(Cor.Branca, tab), coluna, 2);
+                colocarNovaPeca(new Peao(Cor.Preta, tab), coluna, 7);
+            }
 
         }
 
