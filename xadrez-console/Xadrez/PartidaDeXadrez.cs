@@ -11,6 +11,8 @@ namespace xadrez_console.Xadrez {
         private HashSet<Peca> pecas;
         private HashSet<Peca> capturadas;
         public bool xeque {  get; private set; }
+        public Peca vuneravelenPassant { get; private set; }
+
 
         public PartidaDeXadrez() {
             tab = new Tabuleiro(8, 8);
@@ -20,6 +22,7 @@ namespace xadrez_console.Xadrez {
             xeque = false;
             pecas = new HashSet<Peca>();
             capturadas = new HashSet<Peca>();
+            vuneravelenPassant = null;
             colocarPecas();
         }
         public Peca executaMovimento(Posicao Origem, Posicao destino) {
@@ -51,6 +54,21 @@ namespace xadrez_console.Xadrez {
                 tab.colocarPeca(T, DestinoT);
 
             }
+
+            // #jogadaespecial en passant
+            if (p is Peao) {
+                if (Origem.coluna !=  destino.coluna && pecaCapturada == null) {
+                    Posicao posP;
+                    if (p.Cor == Cor.Branca) {
+                        posP = new Posicao(destino.linha + 1, destino.coluna);
+                    } else {
+                        posP = new Posicao(destino.linha - 1, destino.coluna);
+                    }
+                    pecaCapturada = tab.RetirarPeca(posP);
+                    capturadas.Add(pecaCapturada);
+                }
+            }
+
             return pecaCapturada;
         }
 
@@ -83,6 +101,20 @@ namespace xadrez_console.Xadrez {
 
             }
 
+            //#jogadaespecial en passant
+            if (p is Peao) {
+                if (origem.coluna != destino.coluna && pecaCapturada != vuneravelenPassant) {
+                    Peca peao = tab.RetirarPeca(destino);
+                    Posicao posP;
+                    if (p.Cor == Cor.Branca) {
+                        posP = new Posicao(3, destino.coluna);
+                    } else {
+                        posP = new Posicao(4, destino.coluna);
+                    }
+                    tab.colocarPeca(peao, posP);
+                }
+            }
+
         }
         public void realizaJogada(Posicao origem, Posicao destino) {
             Peca pecaCapturada = executaMovimento(origem, destino);
@@ -104,6 +136,15 @@ namespace xadrez_console.Xadrez {
             } else {
                 turno++;
                 mudaJogador();
+            }
+
+            Peca p = tab.peca(destino);
+
+            // #jogadaespecial en passant
+            if( p is Peao && (destino.linha == origem.linha + 2 || destino.linha == origem.linha - 2)) {
+                vuneravelenPassant = p;
+            } else {
+                vuneravelenPassant = null;
             }
         }
 
@@ -247,8 +288,8 @@ namespace xadrez_console.Xadrez {
 
             // Colocando os peões
             for (char coluna = 'a'; coluna <= 'h'; coluna++) {
-                colocarNovaPeca(new Peao(Cor.Branca, tab), coluna, 2);
-                colocarNovaPeca(new Peao(Cor.Preta, tab), coluna, 7);
+                colocarNovaPeca(new Peao(Cor.Branca, tab, this), coluna, 2);
+                colocarNovaPeca(new Peao(Cor.Preta, tab, this), coluna, 7);
             }
             
 
